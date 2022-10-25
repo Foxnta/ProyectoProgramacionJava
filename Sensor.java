@@ -1,7 +1,7 @@
 public class Sensor {
 
-    static int[] sensores = new int[8];
-    public  int tamano=8; 
+    public static Sensor[] sensores = new Sensor[8];
+    public static int tamano=8; 
     public static int posAnadir=0;
     private String tipo;
     private double valor;
@@ -15,18 +15,18 @@ public class Sensor {
         this.valor=v;
     }
     // --------------------------------Setters and Getters------------------------------------------
-    
+   
     public void setTamano(int tamano){
-        this.tamano=tamano;
+        Sensor.tamano=tamano;
     }
     public int getTamano(){
-        return this.tamano;
+        return Sensor.tamano;
     }
     public void setPosAnadir(int posAnadir){
-        this.posAnadir=posAnadir;
+        Sensor.posAnadir=posAnadir;
     }
     public int getPosAnadir(){
-        return this.posAnadir;
+        return Sensor.posAnadir;
     }
     public void setTipo(String tipo){
         this.tipo=tipo;
@@ -49,12 +49,17 @@ public class Sensor {
         mensaje = "Tipo: "+ tipo+ " Valor: " + valor;
         return mensaje;
     }
-    public String toStringSensores(){
+    public static String toStringSensores(){
         String mensaje="";
+        for(int i=0; i<posAnadir;i++){
+            mensaje = mensaje + "/" +  Sensor.sensores[i].toString();     
+        }    
         return mensaje;
     }
     public static int cantidadSensores(){
-        return sensores.length; 
+        return posAnadir; 
     }
+
+    public static S
 
 }

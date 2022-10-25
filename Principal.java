@@ -5,12 +5,14 @@ public class Principal{
     }
     public static void mostrarmenu(){
         Scanner scan = new Scanner(System.in);
+        
         while(true){
             System.out.println("Si ingresa 0: Finaliza el Programa");
             System.out.println("Si ingresa 1: Se piden parametros para alamcenar un vehiculo");
             System.out.println("Si ingresa 2: Informacion de todos los vehiculos");
             System.out.println("Si ingresa 3: Cantidad de Vehiculos");
-            System.out.println("Si ingresa 5:Todos los vehiculos entre el 2000-2021");
+            System.out.println("Si ingresa 4: Informacion de todos los vehiculos verdes");
+            System.out.println("Si ingresa 5: Todos los vehiculos entre el 2000-2021");
             System.out.println("Si ingresa 6: Se crea un Sensor con 2 parametros");
             System.out.println("Si ingresa 7: Informacion de todos los sensores almacenados");
             System.out.println("Si ingresa 8: Cantidad de sensores hasta el momento");
@@ -27,43 +29,71 @@ public class Principal{
                 if (tamanov<10){
                     System.out.println("Modelo: ");
                     int modelo = scan.nextInt();
+                    scan.nextLine();
                     System.out.println("Marca: ");
                     String marca = scan.nextLine();
                     System.out.println("Valor Comercial: "); 
                     double valorComercial = scan.nextDouble(); 
+                    scan.nextLine();
                     System.out.println("Color: ");
                     String color = scan.nextLine();
+                    
                     // Preguntar cuando se ejecuta el segundo constructor de 3 atributos
-                    Vehiculo Objvehiculo = new Vehiculo(modelo,marca,valorComercial,color); 
+                    if(color.isEmpty()||color.isBlank()){
+                        Vehiculo.vehiculos[Vehiculo.posAnadir]= new Vehiculo(modelo,marca,valorComercial);
+                    }
+                    else{
+                        Vehiculo.vehiculos[Vehiculo.posAnadir]= new Vehiculo(modelo,marca,valorComercial,color);
+                    }
+                    
+                    
+                    Vehiculo.posAnadir++;
+                    
                 }
                 else{
                     System.out.println("Error base de datos llena");
                 }
             }
             else if(numero==2){
-                //Imprimir toda la informacion de los objetos vehiculos 
+                //Imprimir toda la informacion de los objetos vehiculos                
+                for(int i=0; i<Vehiculo.posAnadir;i++){
+                    System.out.println(Vehiculo.vehiculos[i].toString());                    
+                }                
             }
             else if(numero==3){
                 //Imprimir la cantidad de vehiculos almacenados
-                System.out.println("cantidad de vehiculos almacenados: "+ Vehiculo.cantidadVehiculos());
+
+                System.out.println("Cantidad de vehiculos almacenados: "+ Vehiculo.cantidadVehiculos());
             }
             else if(numero==4){
-                //imprimir info por pantalla de los verdes    
+                //Imprimir info por pantalla de los verdes
+                for(int i=0; i<Vehiculo.posAnadir;i++){
+                    if(Vehiculo.vehiculos[i].getColor().equals("verde")){
+                        System.out.println(Vehiculo.vehiculos[i].toString());
+                    }
+                }
             }
             else if(numero==5){
                 //imprimir info de los vehículos que tengan modelo entre 2000 y 2021 
+                for(int i=0; i<Vehiculo.posAnadir;i++){
+                    if(Vehiculo.vehiculos[i].getModelo()>2000 && Vehiculo.vehiculos[i].getModelo()<2021){
+                        System.out.println(Vehiculo.vehiculos[i].toString());
+                    }
+                }
             }
+
             else if(numero==6){
                 int tamanos = Sensor.posAnadir;
+
                 if (tamanos<8){
-                    
                     System.out.println("Tipo: ");
                     String tipo = scan.nextLine();
+                    scan.nextLine();
                     System.out.println("Valor: "); 
                     double valor = scan.nextDouble(); 
-                  
-                    // Preguntar cuando se ejecuta el segundo constructor de 3 atributos
-                    Sensor objSensor = new Sensor(tipo,valor); 
+        
+                    Sensor.sensores[Sensor.posAnadir]= new Sensor(tipo, valor);
+                    Sensor.posAnadir++;
                 }
                 else{
                     System.out.println("Error base de datos llena");
@@ -71,13 +101,19 @@ public class Principal{
             }
             else if(numero==7){
                 //Imprimir toda la informacion de los objetos sensores
+                System.out.println(Sensor.toStringSensores());
             }
             else if(numero==8){
                 //Imprimir la cantidad de sensores almacenados
                 System.out.println("cantidad de sensores almacenados: "+ Sensor.cantidadSensores());
             }
             else if(numero==9){
-                //imprimir info por pantalla de los tipo temperatura   
+                //imprimir info por pantalla de los tipo temperatura  
+                for(int i=0; i<Sensor.posAnadir;i++){
+                    if(Sensor.sensores[i].getTipo().equals("temperatura")){
+                        System.out.println(Sensor.sensores[i].toString());
+                    }
+                }
 
             }
             else if(numero==666){
@@ -93,9 +129,7 @@ public class Principal{
 
             }
 
-            
-            
-
+        
         }
     }
 }

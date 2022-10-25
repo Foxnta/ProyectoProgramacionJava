@@ -1,8 +1,8 @@
 public class Vehiculo
 {
-    static int[] vehiculos = new int[10];
-    public int tamano=10; 
-    public static int posAnadir=0;
+    public static Vehiculo[] vehiculos = new Vehiculo[10];
+    public static int tamano=10; 
+    public  static int posAnadir=0;
     private int modelo;
     private String marca; 
     private double valorComercial; 
@@ -13,7 +13,7 @@ public class Vehiculo
 
     }
     public Vehiculo(int mo,String ma, double va){
-        this(mo,ma,va,"Verde"); 
+        this(mo,ma,va,"verde"); 
     }
 
 
@@ -22,20 +22,22 @@ public class Vehiculo
         this.marca=ma;
         this.valorComercial = va; 
         this.color=co;
+        
+         
     }
 
     // --------------------------------Setters and Getters------------------------------------------
     public void setTamano(int tamano){
-        this.tamano=tamano;
+        Vehiculo.tamano=tamano;
     }
     public int getTamano(){
-        return this.tamano;
+        return Vehiculo.tamano;
     }
     public void setposAnadir(int posAnadir){
-        this.posAnadir=posAnadir;
+        Vehiculo.posAnadir=posAnadir;
     }
     public int getposAnadir(){
-        return this.posAnadir;
+        return Vehiculo.posAnadir;
     }
     public void setModelo(int modelo){
         this.modelo=modelo;
@@ -64,17 +66,24 @@ public class Vehiculo
     }
     // --------------------------------Metodos------------------------------------------
 
+
     public String toString(){
         String mensaje;
         mensaje = "Modelo: "+ modelo+ " Marca: " + marca+ " Valor Comercial: "+ valorComercial + " color: " + color;
         return mensaje;
     }
-    public String toStringVehiculos(){
+
+    public static String toStringVehiculos(){
         String mensaje="";
+        for(int i=0; i<posAnadir;i++){
+            mensaje= mensaje + vehiculos[i].toString()+" / ";
+        }
         return mensaje;
     }
+
     public static int cantidadVehiculos(){
-        return vehiculos.length; 
+        return posAnadir;
+         
     }
 
 }
