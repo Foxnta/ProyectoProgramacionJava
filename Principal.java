@@ -105,8 +105,6 @@ public class Principal{
                         double valor = scan.nextDouble(); 
                         scan.nextLine();
 
-                        System.out.println(tipo);
-                        System.out.println(valor);
 
                         Sensor.sensores[Sensor.posAnadir]= new Sensor(tipo, valor);
                         Sensor.posAnadir++;
