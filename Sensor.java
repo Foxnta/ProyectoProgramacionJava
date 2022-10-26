@@ -1,3 +1,5 @@
+
+
 public class Sensor {
 
     public static Sensor[] sensores = new Sensor[8];
@@ -5,7 +7,7 @@ public class Sensor {
     public static int posAnadir=0;
     private String tipo;
     private double valor;
-    
+    public static int cont;
     // -----------------------------------Constructores----------------------------------------
     public Sensor(){
 
@@ -52,14 +54,43 @@ public class Sensor {
     public static String toStringSensores(){
         String mensaje="";
         for(int i=0; i<posAnadir;i++){
-            mensaje = mensaje + "/" +  Sensor.sensores[i].toString();     
+            mensaje = mensaje + "\n" +  Sensor.sensores[i].toString();     
         }    
+        
         return mensaje;
     }
     public static int cantidadSensores(){
         return posAnadir; 
     }
 
-    public static S
+    public static Sensor[] ordenarSensores(Sensor[] lista){
+       
+        Sensor[] sensoressort = new Sensor[8];
+        int cont = 0;
+        
+        for(int i=0; i<Sensor.posAnadir;i++){
+            if(sensores[i].getTipo().equals("temperatura")){
+                sensoressort[cont]=sensores[i];
+                cont++;
+            } 
+        }
+
+        for (int i=0; i<cont-1;i++){
+            int pos_menor;
+            Sensor temp;
+            pos_menor = i;
+
+            for(int j=i+1; j<cont;j++){
+                if (sensoressort[j].getValor()<sensoressort[pos_menor].getValor()){
+                    pos_menor=j;
+                }
+            }
+            temp=sensoressort[i];
+            sensoressort[i]=sensoressort[pos_menor];
+            sensoressort[pos_menor]=temp;
+        }
+
+        return sensoressort;
+    }
 
 }
